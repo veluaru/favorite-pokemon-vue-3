@@ -3,21 +3,25 @@
     <img
       src="../assets/Pikachu.png"
       alt="Welcome Pikachu"
-      class="welcome-icon"
+      class="welcome__icon"
     />
-    <span>Welcome to Pokédex</span>
-    <span>
+    <span class="welcome__title">Welcome to Pokédex</span>
+    <span class="welcome__sub-title">
       The digital encyclopedia created by Professor Oak is an invaluable tool to
       Trainers in the Pokémon world.
     </span>
-    <button class="main-button">Get started</button>
+    <button class="welcome__main-button" @click="changeView('home')">Get started</button>
   </div>
 </template>
 
 <script setup>
-import SearchBar from "@/components/SearchBar.vue";
-import PokemonList from "@/components/PokemonList.vue";
-import FooterButtons from "@/components/FooterButtons.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const changeView = (viewName) => {
+  router.push({ name: viewName });
+};
 </script>
 
 <style scoped>
@@ -27,17 +31,32 @@ import FooterButtons from "@/components/FooterButtons.vue";
   justify-content: center;
   align-items: center;
   row-gap: 30px;
+  width: 100%;
+  margin-top: 10%;
+  text-align: center;
 }
-.welcome-icon {
+.welcome__icon {
   max-width: 325px;
 }
-.main-button {
+.welcome__title {
+  font-size: 26px;
+  font-weight: bold;
+}
+.welcome__sub-title {
+  font-size: 18px;
+  font-weight: medium;
+  max-width: 570px;
+}
+.welcome__main-button {
   width: 150px;
   height: 44px;
   border: none;
   border-radius: 60px;
   color: white;
+  font-size: 18px;
+  font-weight: bold;
   background-color: #f22539;
+  cursor: pointer;
 }
 </style>
 
