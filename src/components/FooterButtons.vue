@@ -2,25 +2,21 @@
   <div class="footer">
     <button
       class="main-button"
-      :class="selectedPokemonView === 'allPokemons' && 'main-button--not-selected'"
+      :class="selectedPokemonView === 'allPokemons' && 'main-button--selected'"
       @click="changeSelectedPokemonView('allPokemons')"
       :disabled="selectedPokemonView === 'allPokemons'"
     >
-      <img src="../assets/ListIcon.png" alt="List" class="basic-icon" />All
+      <i class="pi pi-list basic-icon"></i>All
     </button>
     <button
       class="main-button"
       :class="
-        selectedPokemonView === 'favoritePokemons' && 'main-button--not-selected'
+        selectedPokemonView === 'favoritePokemons' && 'main-button--selected'
       "
       @click="changeSelectedPokemonView('favoritePokemons')"
       :disabled="selectedPokemonView === 'favoritePokemons'"
     >
-      <img
-        src="../assets/WhiteStar.png"
-        alt="Star"
-        class="basic-icon"
-      />Favorites
+      <i class="pi pi-star-fill basic-icon"></i>Favorites
     </button>
   </div>
 </template>
@@ -32,8 +28,8 @@ import store from "../store";
 const selectedPokemonView = computed(() => store.state.selectedPokemonView);
 
 const changeSelectedPokemonView = (view) => {
-  store.commit('setSelectedPokemonView', view);
-}
+  store.commit("setSelectedPokemonView", view);
+};
 </script>
 
 <style scoped>
@@ -58,7 +54,7 @@ const changeSelectedPokemonView = (view) => {
   color: white;
   font-weight: bold;
   font-size: 18px;
-  background-color: #f22539;
+  background-color: #bfbfbf;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -66,13 +62,13 @@ const changeSelectedPokemonView = (view) => {
   column-gap: 10px;
   cursor: pointer;
 }
-.main-button--not-selected {
-  background-color: #bfbfbf;
+.main-button--selected {
+  background-color: #f22539;
   cursor: initial;
 }
 
 .basic-icon {
-  width: 22px;
-  height: 22px;
+  color: white;
+  font-size: 22px;
 }
 </style>

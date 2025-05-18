@@ -3,7 +3,7 @@
     <div v-for="pokemon in selectedPokemons" :key="pokemon.name">
       <PokemonRow
         :pokemonData="pokemon"
-        :isFavorite="favoritePokemons.includes(pokemon.name)"
+        :isFavorite="favoritePokemonNames.includes(pokemon.name)"
         @addOrRemoveFavorite="addOrRemoveFavorite(pokemon)"
       />
     </div>
@@ -20,11 +20,12 @@ const selectedPokemons = ref([]);
 const selectedPokemonView = computed(() => store.state.selectedPokemonView);
 const allPokemons = computed(() => store.state.allPokemons);
 const favoritePokemons = computed(() => store.state.favoritePokemons);
+const favoritePokemonNames = computed(() => store.state.favoritePokemonNames);
 const keySelectedPokemons = ref(0);
 
 const updatePokemonsList = async () => {
   if (selectedPokemonView.value === "allPokemons") {
-    await store.dispatch("getAllPokemons");
+    if (allPokemons.value.length === 0) await store.dispatch("getAllPokemons");
     selectedPokemons.value = allPokemons.value;
   } else {
     selectedPokemons.value = favoritePokemons.value;
@@ -34,18 +35,23 @@ const updatePokemonsList = async () => {
 
 const addOrRemoveFavorite = (pokemon) => {
   for (let i = 0; i < favoritePokemons.value.length; i++) {
-    if (favoritePokemons.value[i] === pokemon.name) {
+    if (favoritePokemonNames.value[i] === pokemon.name) {
+      favoritePokemonNames.value.splice(i, 1);
       favoritePokemons.value.splice(i, 1);
       return;
     }
   }
-  favoritePokemons.value.push(pokemon.name);
+  favoritePokemonNames.value.push(pokemon.name);
+  favoritePokemons.value.push(pokemon);
 };
 
 onBeforeMount(() => {
   updatePokemonsList();
 });
 watch(selectedPokemonView, () => {
+  updatePokemonsList();
+});
+watch(allPokemons, () => {
   updatePokemonsList();
 });
 </script>

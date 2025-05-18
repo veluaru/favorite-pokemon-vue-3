@@ -5,6 +5,7 @@ export default createStore({
   state() {
     return {
       favoritePokemons: [],
+      favoritePokemonNames: [],
       allPokemons: [],
       selectedPokemon: {},
       selectedPokemonView: 'allPokemons',
@@ -16,6 +17,9 @@ export default createStore({
   mutations: {
     setFavoritePokemons(state, newValue) {
       state.favoritePokemons = newValue || [];
+    },
+    setFavoritePokemonNames(state, newValue) {
+      state.favoritePokemonNames = newValue || [];
     },
     setAllPokemons(state, newValue) {
       state.allPokemons = newValue;
@@ -35,7 +39,6 @@ export default createStore({
       commit('setLoadingPokemons');
       axiosClient.get('https://pokeapi.co/api/v2/pokemon')
         .then(({ data }) => {
-          console.log(data)
           commit('setAllPokemons', data.results)
           commit('setLoadingPokemons', false)
         }).catch(error => {
