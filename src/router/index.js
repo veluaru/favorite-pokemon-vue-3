@@ -2,9 +2,10 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import WelcomeView from '../views/WelcomeView.vue'
 import SearchView from '../views/SearchView.vue'
+import PokemonsListView from '../views/PokemonsListView.vue'
 
 const routes = [
-    {
+  {
     path: '/',
     name: 'welcome',
     component: WelcomeView
@@ -12,17 +13,25 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    children: [
+      {
+        path: '/home',
+        name: 'pokemons',
+        component: PokemonsListView
+      },
+      {
+        path: '/search=:word',
+        name: 'search',
+        component: SearchView
+      },
+
+    ]
   },
-    {
-    path: '/search:word',
-    name: 'search',
-    component: SearchView
-  },
+
+  { path: '/404', component: () => import('../views/NotFound.vue') },
   {
-    path: '/notFound',
-    name: 'notFound',
-    component: () => import('../views/NotFound.vue')
+    path: '/:catchAll(.*)', redirect: '404'
   }
 ]
 

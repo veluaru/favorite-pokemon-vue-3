@@ -11,6 +11,8 @@ export default createStore({
       selectedPokemonView: 'allPokemons',
       loadingPokemons: false,
       loadingPokemonByName: false,
+      isSearchView: false,
+      searchPokemonWord: null,
     }
   },
   getters: {
@@ -36,6 +38,12 @@ export default createStore({
     },
     setLoadingPokemonByName(state, newValue) {
       state.loadingPokemonByName = newValue || false;
+    },
+    setIsSearchView(state, newValue) {
+      state.isSearchView = newValue || false;
+    },
+    setSearchPokemonWord(state, newValue) {
+      state.searchPokemonWord = newValue || false;
     }
   },
   actions: {
@@ -43,12 +51,12 @@ export default createStore({
       commit('setLoadingPokemons', true);
       setTimeout(() => {
         axiosClient.get('https://pokeapi.co/api/v2/pokemon')
-        .then(({ data }) => {
-          commit('setAllPokemons', data.results)
-          commit('setLoadingPokemons', false)
-        }).catch(error => {
-          console.error(error);
-        });
+          .then(({ data }) => {
+            commit('setAllPokemons', data.results)
+            commit('setLoadingPokemons', false)
+          }).catch(error => {
+            console.error(error);
+          });
       }, 1000);
 
     },

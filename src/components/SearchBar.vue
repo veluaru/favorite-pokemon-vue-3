@@ -1,7 +1,7 @@
 <template>
   <div class="search-bar">
     <input
-      :value="searchWord"
+      v-model="searchWord"
       type="text"
       class="search-bar__input"
       placeholder="Search"
@@ -13,26 +13,27 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const store = useStore();
 const searchWord = ref("");
+const isSearchView = computed(() => store.state.isSearchView);
 const allPokemons = computed(() => store.state.allPokemons);
-const isAllPokemonsFiltered = ref(false);
+
+const changeView = (viewName, params) => {
+  router.push({ name: viewName, params: {...params} });
+};
 
 const searchPokemonWord = async () => {
+  store.commit('setSearchPokemonWord', searchWord.value);
   if (searchWord.value) {
-    console.log("1")
     if (allPokemons.value.length === 0) await store.dispatch("getAllPokemons");
-    const newArray = allPokemons.value.filter((pokemon) =>
-      pokemon.name.includes(searchWord.value)
-    );
-    store.commit("setAllPokemons", newArray);
-    return;
+    changeView("search", { word: searchWord.value });
   }
-  if(!searchWord.value && isAllPokemonsFiltered.value) {
-    console.log("2")
-    await store.dispatch("getAllPokemons");
-    return;
+  if (!searchWord.value && isSearchView.value) {
+    changeView("pokemons");
   }
 };
 </script>

@@ -10,7 +10,7 @@
       The digital encyclopedia created by Professor Oak is an invaluable tool to
       Trainers in the Pokémon world.
     </span>
-    <button class="welcome__main-button" @click="changeView('home')">
+    <button class="welcome__main-button" @click="changeView('pokemons')">
       Get started
     </button>
   </div>
