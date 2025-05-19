@@ -40,7 +40,7 @@ const loadingPokemons = computed(() => store.state.loadingPokemons);
 const filteredPokemonsKey = ref(0);
 
 const filterPokemons = () => {
-  filteredPokemons.value = allPokemons.value.filter((pokemon) =>
+  filteredPokemons.value = allPokemons.value.results.filter((pokemon) =>
     pokemon.name.includes(searchPokemonWord.value || route.params.word)
   );
   filteredPokemonsKey.value += 1;
@@ -52,7 +52,7 @@ const changeView = (viewName) => {
 
 onBeforeMount(async () => {
   store.commit("setIsSearchView", true);
-  if (allPokemons.value.length === 0) await store.dispatch("getAllPokemons");
+  if (!allPokemons.value) await store.dispatch("getAllPokemons");
   filterPokemons();
 });
 
