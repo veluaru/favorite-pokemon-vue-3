@@ -1,19 +1,23 @@
 <template>
-  <div class="search">
+  <div class="search" v-if="!loadingPokemons">
     <div v-for="pokemon in selectedPokemons" :key="pokemon.name">
       <PokemonRow
         :pokemonData="pokemon"
         :isFavorite="favoritePokemonNames.includes(pokemon.name)"
         @addOrRemoveFavorite="addOrRemoveFavorite(pokemon)"
+        @openPokemonDetails="openPokemonDetails(pokemon)"
       />
     </div>
+  </div>
+  <div v-else>
+    <img src="../assets/images/Loader.png" alt="Loading" class="loading" />
   </div>
 </template>
  
 <script setup>
 import { ref, computed, watch, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-import PokemonRow from "./PokemonRow.vue";
+import PokemonRow from "../components/PokemonRow.vue";
 
 const store = useStore();
 const selectedPokemons = ref([]);
@@ -21,6 +25,7 @@ const selectedPokemonView = computed(() => store.state.selectedPokemonView);
 const allPokemons = computed(() => store.state.allPokemons);
 const favoritePokemons = computed(() => store.state.favoritePokemons);
 const favoritePokemonNames = computed(() => store.state.favoritePokemonNames);
+const loadingPokemons = computed(() => store.state.loadingPokemons);
 const keySelectedPokemons = ref(0);
 
 const updatePokemonsList = async () => {
@@ -48,15 +53,12 @@ const addOrRemoveFavorite = (pokemon) => {
 onBeforeMount(() => {
   updatePokemonsList();
 });
-watch(selectedPokemonView, () => {
-  updatePokemonsList();
-});
 watch(allPokemons, () => {
   updatePokemonsList();
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .search {
   display: flex;
   flex-direction: column;
@@ -65,5 +67,9 @@ watch(allPokemons, () => {
   width: 100%;
   overflow: auto;
   height: 80%;
+}
+.loading {
+  width: 106px;
+  height: 106px;
 }
 </style>

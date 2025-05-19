@@ -1,17 +1,17 @@
 <template>
   <div class="footer">
     <button
-      class="main-button"
-      :class="selectedPokemonView === 'allPokemons' && 'main-button--selected'"
+      class="footer__main-button"
+      :class="selectedPokemonView === 'allPokemons' && 'footer__main-button--selected'"
       @click="changeSelectedPokemonView('allPokemons')"
       :disabled="selectedPokemonView === 'allPokemons'"
     >
       <i class="pi pi-list basic-icon"></i>All
     </button>
     <button
-      class="main-button"
+      class="footer__main-button"
       :class="
-        selectedPokemonView === 'favoritePokemons' && 'main-button--selected'
+        selectedPokemonView === 'favoritePokemons' && 'footer__main-button--selected'
       "
       @click="changeSelectedPokemonView('favoritePokemons')"
       :disabled="selectedPokemonView === 'favoritePokemons'"
@@ -32,7 +32,7 @@ const changeSelectedPokemonView = (view) => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .footer {
   display: flex;
   flex-direction: row;
@@ -44,27 +44,27 @@ const changeSelectedPokemonView = (view) => {
   bottom: 0;
   width: 100%;
   padding: 20px 0;
-}
-.main-button {
-  width: 100%;
-  max-width: 275px;
-  height: 44px;
-  border: none;
-  border-radius: 60px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  background-color: #bfbfbf;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  column-gap: 10px;
-  cursor: pointer;
-}
-.main-button--selected {
-  background-color: #f22539;
-  cursor: initial;
+  &__main-button {
+    width: 100%;
+    max-width: 275px;
+    height: 44px;
+    border: none;
+    border-radius: 60px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #bfbfbf;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    cursor: pointer;
+    &--selected {
+      background-color: #f22539;
+      cursor: initial;
+    }
+  }
 }
 
 .basic-icon {

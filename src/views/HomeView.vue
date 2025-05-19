@@ -12,7 +12,7 @@ import PokemonList from "@/components/PokemonList.vue";
 import FooterButtons from "@/components/FooterButtons.vue";
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .home {
   height: 100vh;
   display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div class="pokemon-list">
+  <div class="pokemon-list" v-if="!loadingPokemons">
     <div v-for="pokemon in selectedPokemons" :key="pokemon.name">
       <PokemonRow
         :pokemonData="pokemon"
@@ -8,12 +8,14 @@
       />
     </div>
   </div>
+  <LoadingComponent v-if="loadingPokemons"/>
 </template>
  
 <script setup>
 import { ref, computed, watch, onBeforeMount } from "vue";
 import { useStore } from "vuex";
 import PokemonRow from "./PokemonRow.vue";
+import LoadingComponent from "./LoadingComponent.vue";
 
 const store = useStore();
 const selectedPokemons = ref([]);
@@ -21,6 +23,7 @@ const selectedPokemonView = computed(() => store.state.selectedPokemonView);
 const allPokemons = computed(() => store.state.allPokemons);
 const favoritePokemons = computed(() => store.state.favoritePokemons);
 const favoritePokemonNames = computed(() => store.state.favoritePokemonNames);
+const loadingPokemons = computed(() => store.state.loadingPokemons);
 const keySelectedPokemons = ref(0);
 
 const updatePokemonsList = async () => {
@@ -45,6 +48,7 @@ const addOrRemoveFavorite = (pokemon) => {
   favoritePokemons.value.push(pokemon);
 };
 
+
 onBeforeMount(() => {
   updatePokemonsList();
 });
@@ -56,7 +60,7 @@ watch(allPokemons, () => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .pokemon-list {
   display: flex;
   flex-direction: column;
@@ -66,4 +70,5 @@ watch(allPokemons, () => {
   overflow: auto;
   height: 80%;
 }
+
 </style>

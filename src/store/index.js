@@ -10,6 +10,7 @@ export default createStore({
       selectedPokemon: {},
       selectedPokemonView: 'allPokemons',
       loadingPokemons: false,
+      loadingPokemonByName: false,
     }
   },
   getters: {
@@ -32,24 +33,34 @@ export default createStore({
     },
     setLoadingPokemons(state, newValue) {
       state.loadingPokemons = newValue || false;
+    },
+    setLoadingPokemonByName(state, newValue) {
+      state.loadingPokemonByName = newValue || false;
     }
   },
   actions: {
     getAllPokemons({ commit }) {
-      commit('setLoadingPokemons');
-      axiosClient.get('https://pokeapi.co/api/v2/pokemon')
+      commit('setLoadingPokemons', true);
+      setTimeout(() => {
+        axiosClient.get('https://pokeapi.co/api/v2/pokemon')
         .then(({ data }) => {
           commit('setAllPokemons', data.results)
           commit('setLoadingPokemons', false)
         }).catch(error => {
           console.error(error);
         });
+      }, 1000);
+
     },
     getPokemonByName({ commit }, payload) {
+      commit('setLoadingPokemonByName', true);
       axiosClient.get(`https://pokeapi.co/api/v2/pokemon/${payload}`)
         .then(({ data }) => {
           commit('setSelectedPokemon', data)
-        })
+          commit('setLoadingPokemonByName', false)
+        }).catch(error => {
+          console.error(error);
+        });
     }
   },
 
