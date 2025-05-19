@@ -44,6 +44,10 @@ const changeSelectedPokemonView = (view) => {
   bottom: 0;
   width: 100%;
   padding: 20px 0;
+    @media screen and (max-width: 328px) {
+      flex-direction: column;
+      row-gap: 20px;
+    }
   &__main-button {
     width: 100%;
     max-width: 275px;

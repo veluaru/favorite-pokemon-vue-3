@@ -79,13 +79,13 @@ const props = defineProps({
 });
 
 const sharePokemon = async () => {
-    let text = `${capitalizeStrings(selectedPokemon.value.name)}`
-    for (let stat of selectedPokemon.value.stats) {
-        const statText = `, ${stat.stat.name} ${stat.base_stat}`
-        text = text+statText;
-    }
-    await navigator.clipboard.writeText(text);
-}
+  let text = `${capitalizeStrings(selectedPokemon.value.name)}`;
+  for (let stat of selectedPokemon.value.stats) {
+    const statText = `, ${stat.stat.name} ${stat.base_stat}`;
+    text = text + statText;
+  }
+  await navigator.clipboard.writeText(text);
+};
 
 onBeforeMount(async () => {
   await store.dispatch("getPokemonByName", props.selectedPokemonDetails.name);
@@ -130,6 +130,7 @@ onBeforeMount(async () => {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      flex-wrap: wrap;
       column-gap: 10px;
       align-items: center;
       border-bottom: 1px solid #e8e8e8;
@@ -177,6 +178,12 @@ onBeforeMount(async () => {
   border-radius: 5px;
   width: 50%;
   box-shadow: 0px -1px 8px 0px #0000002c;
+  @media screen and (max-width: 768px) {
+    width: 70%;
+  }
+    @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 }
 
 .modal-close {

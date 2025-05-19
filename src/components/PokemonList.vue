@@ -7,8 +7,14 @@
         @addOrRemoveFavorite="addOrRemoveFavorite(pokemon)"
       />
     </div>
+    <div class="pokemon-list__empty" v-if="selectedPokemons.length === 0">
+      <span class="pokemon-list__empty__title">Uh-oh!</span>
+      <span class="pokemon-lis__emptyt__sub-title"
+        >You look lost on your journey! No pokemons to show.</span
+      >
+    </div>
   </div>
-  <LoadingComponent v-if="loadingPokemons"/>
+  <LoadingComponent v-if="loadingPokemons" />
 </template>
  
 <script setup>
@@ -48,7 +54,6 @@ const addOrRemoveFavorite = (pokemon) => {
   favoritePokemons.value.push(pokemon);
 };
 
-
 onBeforeMount(() => {
   updatePokemonsList();
 });
@@ -69,6 +74,24 @@ watch(allPokemons, () => {
   width: 100%;
   overflow: auto;
   height: 80%;
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 30px;
+    width: 100%;
+    margin-top: 10%;
+    text-align: center;
+    &__title {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    &__sub-title {
+      font-size: 18px;
+      font-weight: medium;
+      max-width: 570px;
+    }
+  }
 }
-
 </style>

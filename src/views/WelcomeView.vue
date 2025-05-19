@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome" v-if="!loadingNextPage">
     <img
       src="../assets/images/Pikachu.png"
       alt="Welcome Pikachu"
@@ -14,15 +14,23 @@
       Get started
     </button>
   </div>
+  <LoadingComponent class="welcome__loading" v-if="loadingNextPage" />
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import LoadingComponent from "../components/LoadingComponent.vue";
 
 const router = useRouter();
+const loadingNextPage = ref(false);
 
 const changeView = (viewName) => {
-  router.push({ name: viewName });
+  loadingNextPage.value = true;
+  setTimeout(() => {
+    loadingNextPage.value = true;
+    router.push({ name: viewName });
+  }, 2000);
 };
 </script>
 
@@ -33,11 +41,13 @@ const changeView = (viewName) => {
   justify-content: center;
   align-items: center;
   row-gap: 30px;
-  width: 100%;
-  margin-top: 10%;
+  padding: 10% 3% 0 3%;
   text-align: center;
   &__icon {
     max-width: 325px;
+    @media screen and (max-width: 328px) {
+      max-width: 150px;
+    }
   }
   &__title {
     font-size: 26px;
@@ -58,6 +68,11 @@ const changeView = (viewName) => {
     font-size: 18px;
     font-weight: medium;
     max-width: 570px;
+  }
+  &__loading {
+    max-width: unset;
+    width: 100%;
+    padding-top: 30%;
   }
 }
 </style>
