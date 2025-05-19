@@ -92,15 +92,7 @@ watch(allPokemons, () => {
       font-weight: bold;
     }
     &__main-button {
-      width: 150px;
-      height: 44px;
-      border: none;
-      border-radius: 60px;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: #f22539;
-      cursor: pointer;
+      @include main-button;
     }
     &__sub-title {
       font-size: 18px;

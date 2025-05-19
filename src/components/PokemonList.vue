@@ -3,8 +3,8 @@
     <div v-for="pokemon in selectedPokemons" :key="pokemon.name">
       <PokemonRow :pokemonData="pokemon" />
     </div>
-
     <vue-awesome-paginate
+      class="pokemon-list__paginate"
       v-if="selectedPokemonView === 'allPokemons'"
       :total-items="allPokemons.count"
       :items-per-page="20"
@@ -36,13 +36,14 @@ const loadingPokemons = computed(() => store.state.loadingPokemons);
 const keySelectedPokemons = ref(0);
 const allPokemonsPagingParams = ref({
   limit: 20,
-  offset: 0
+  offset: 0,
 });
 const currentPage = ref(1);
 
 const updatePokemonsList = async () => {
   if (selectedPokemonView.value === "allPokemons") {
-    if (!allPokemons.value) await store.dispatch("getAllPokemons", allPokemonsPagingParams.value);
+    if (!allPokemons.value)
+      await store.dispatch("getAllPokemons", allPokemonsPagingParams.value);
     selectedPokemons.value = allPokemons.value?.results;
   } else {
     selectedPokemons.value = favoritePokemons.value;
@@ -51,8 +52,9 @@ const updatePokemonsList = async () => {
 };
 
 const onClickPagingHandler = async (event) => {
-  console.log(event)
-  allPokemonsPagingParams.value.offset = (event - 1) * allPokemonsPagingParams.value.limit;
+  currentPage.value = event;
+  allPokemonsPagingParams.value.offset =
+    (event - 1) * allPokemonsPagingParams.value.limit;
   await store.dispatch("getAllPokemons", allPokemonsPagingParams.value);
 };
 
@@ -60,6 +62,10 @@ onBeforeMount(() => {
   updatePokemonsList();
 });
 watch(selectedPokemonView, () => {
+  allPokemonsPagingParams.value = {
+    limit: 20,
+    offset: (currentPage.value - 1) * allPokemonsPagingParams.value.limit,
+  };
   updatePokemonsList();
 });
 watch(allPokemons, () => {
@@ -95,5 +101,8 @@ watch(allPokemons, () => {
       max-width: 570px;
     }
   }
+}
+:deep() {
+  @extend %paginate;
 }
 </style>

@@ -50,8 +50,7 @@ export default createStore({
     getAllPokemons({ commit }, payload) {
       commit('setLoadingPokemons', true);
       setTimeout(() => {
-        console.log(payload)
-        axiosClient.get('https://pokeapi.co/api/v2/pokemon', { payload })
+        axiosClient.get('https://pokeapi.co/api/v2/pokemon', {params: payload})
           .then(({ data }) => {
             commit('setAllPokemons', data)
             commit('setLoadingPokemons', false)
