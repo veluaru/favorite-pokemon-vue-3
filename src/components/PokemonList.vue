@@ -1,10 +1,16 @@
 <template>
   <div class="pokemon-list" v-if="!loadingPokemons">
     <div v-for="pokemon in selectedPokemons" :key="pokemon.name">
-      <PokemonRow
-        :pokemonData="pokemon"
-      />
+      <PokemonRow :pokemonData="pokemon" />
     </div>
+    <vue-awesome-paginate
+      class="pokemon-list__paginate"
+      v-if="selectedPokemonView === 'allPokemons'"
+      :total-items="allPokemons.count"
+      :items-per-page="20"
+      v-model="currentPage"
+      @click="onClickPagingHandler"
+    />
     <div class="pokemon-list__empty" v-if="selectedPokemons.length === 0">
       <span class="pokemon-list__empty__title">Uh-oh!</span>
       <span class="pokemon-lis__emptyt__sub-title"
@@ -28,21 +34,38 @@ const allPokemons = computed(() => store.state.allPokemons);
 const favoritePokemons = computed(() => store.state.favoritePokemons);
 const loadingPokemons = computed(() => store.state.loadingPokemons);
 const keySelectedPokemons = ref(0);
+const allPokemonsPagingParams = ref({
+  limit: 20,
+  offset: 0,
+});
+const currentPage = ref(1);
 
 const updatePokemonsList = async () => {
   if (selectedPokemonView.value === "allPokemons") {
-    if (allPokemons.value.length === 0) await store.dispatch("getAllPokemons");
-    selectedPokemons.value = allPokemons.value;
+    if (!allPokemons.value)
+      await store.dispatch("getAllPokemons", allPokemonsPagingParams.value);
+    selectedPokemons.value = allPokemons.value?.results;
   } else {
     selectedPokemons.value = favoritePokemons.value;
   }
   keySelectedPokemons.value += 1;
 };
 
+const onClickPagingHandler = async (event) => {
+  currentPage.value = event;
+  allPokemonsPagingParams.value.offset =
+    (event - 1) * allPokemonsPagingParams.value.limit;
+  await store.dispatch("getAllPokemons", allPokemonsPagingParams.value);
+};
+
 onBeforeMount(() => {
   updatePokemonsList();
 });
 watch(selectedPokemonView, () => {
+  allPokemonsPagingParams.value = {
+    limit: 20,
+    offset: (currentPage.value - 1) * allPokemonsPagingParams.value.limit,
+  };
   updatePokemonsList();
 });
 watch(allPokemons, () => {
@@ -78,5 +101,8 @@ watch(allPokemons, () => {
       max-width: 570px;
     }
   }
+}
+:deep() {
+  @extend %paginate;
 }
 </style>
