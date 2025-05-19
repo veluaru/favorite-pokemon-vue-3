@@ -49,14 +49,9 @@ const changeSelectedPokemonView = (view) => {
       row-gap: 20px;
     }
   &__main-button {
+    @include main-button;
     width: 100%;
     max-width: 275px;
-    height: 44px;
-    border: none;
-    border-radius: 60px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
     background-color: #bfbfbf;
     display: flex;
     flex-direction: row;

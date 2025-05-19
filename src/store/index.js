@@ -6,7 +6,7 @@ export default createStore({
     return {
       favoritePokemons: [],
       favoritePokemonNames: [],
-      allPokemons: [],
+      allPokemons: null,
       selectedPokemon: {},
       selectedPokemonView: 'allPokemons',
       loadingPokemons: false,
@@ -47,12 +47,12 @@ export default createStore({
     }
   },
   actions: {
-    getAllPokemons({ commit }) {
+    getAllPokemons({ commit }, payload) {
       commit('setLoadingPokemons', true);
       setTimeout(() => {
-        axiosClient.get('https://pokeapi.co/api/v2/pokemon')
+        axiosClient.get('https://pokeapi.co/api/v2/pokemon', {params: payload})
           .then(({ data }) => {
-            commit('setAllPokemons', data.results)
+            commit('setAllPokemons', data)
             commit('setLoadingPokemons', false)
           }).catch(error => {
             console.error(error);

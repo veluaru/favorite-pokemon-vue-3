@@ -40,7 +40,7 @@ const loadingPokemons = computed(() => store.state.loadingPokemons);
 const filteredPokemonsKey = ref(0);
 
 const filterPokemons = () => {
-  filteredPokemons.value = allPokemons.value.filter((pokemon) =>
+  filteredPokemons.value = allPokemons.value.results.filter((pokemon) =>
     pokemon.name.includes(searchPokemonWord.value || route.params.word)
   );
   filteredPokemonsKey.value += 1;
@@ -52,7 +52,7 @@ const changeView = (viewName) => {
 
 onBeforeMount(async () => {
   store.commit("setIsSearchView", true);
-  if (allPokemons.value.length === 0) await store.dispatch("getAllPokemons");
+  if (!allPokemons.value) await store.dispatch("getAllPokemons");
   filterPokemons();
 });
 
@@ -92,15 +92,7 @@ watch(allPokemons, () => {
       font-weight: bold;
     }
     &__main-button {
-      width: 150px;
-      height: 44px;
-      border: none;
-      border-radius: 60px;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: #f22539;
-      cursor: pointer;
+      @include main-button;
     }
     &__sub-title {
       font-size: 18px;

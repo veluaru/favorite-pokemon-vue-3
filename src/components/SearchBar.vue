@@ -32,7 +32,7 @@ const changeView = (viewName, params) => {
 const searchPokemonWord = async () => {
   store.commit("setSearchPokemonWord", searchWord.value);
   if (searchWord.value) {
-    if (allPokemons.value.length === 0) await store.dispatch("getAllPokemons");
+    if (!allPokemons.value) await store.dispatch("getAllPokemons");
     changeView("search", { word: searchWord.value });
   }
   if (!searchWord.value && isSearchView.value) {
