@@ -3,10 +3,10 @@
     <span class="pokemon-row__name" @click="openPokemonDetails">
       {{ capitalizeStrings(props.pokemonData.name) }}
     </span>
-    <div class="pokemon-row__circle" @click="emit('addOrRemoveFavorite')">
+    <div class="pokemon-row__circle" @click="addOrRemoveFavorite()">
       <i
         class="pi pi-star-fill pokemon-row__icon"
-        :style="{ color: props.isFavorite ? '#ECA539' : '#BFBFBF' }"
+        :style="{ color: favoritePokemonNames.includes(props.pokemonData.name) ? '#ECA539' : '#BFBFBF' }"
       ></i>
     </div>
   </div>
@@ -18,11 +18,15 @@
 </template>
  
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import PokemonDetailsModal from "./PokemonDetailsModal.vue";
 import useModifyStrings from "../composables/modifyStrings";
+import { useStore } from "vuex";
 
+const store = useStore();
 const { capitalizeStrings } = useModifyStrings();
+const favoritePokemons = computed(() => store.state.favoritePokemons);
+const favoritePokemonNames = computed(() => store.state.favoritePokemonNames);
 const showPokemonDetailsModal = ref(false);
 const selectedPokemonDetails = ref({});
 const props = defineProps({
@@ -30,13 +34,8 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  isFavorite: {
-    type: Boolean,
-    default: () => false,
-    required: false,
-  },
 });
-const emit = defineEmits(["addOrRemoveFavorite", "openPokemonDetails"]);
+defineEmits(["openPokemonDetails"]);
 
 const openPokemonDetails = () => {
   selectedPokemonDetails.value = props.pokemonData;
@@ -46,6 +45,18 @@ const openPokemonDetails = () => {
 const closePokemonDetails = () => {
   showPokemonDetailsModal.value = false;
   selectedPokemonDetails.value = {};
+};
+
+const addOrRemoveFavorite = () => {
+  for (let i = 0; i < favoritePokemons.value.length; i++) {
+    if (favoritePokemonNames.value[i] === props.pokemonData.name) {
+      favoritePokemonNames.value.splice(i, 1);
+      favoritePokemons.value.splice(i, 1);
+      return;
+    }
+  }
+  favoritePokemonNames.value.push(props.pokemonData.name);
+  favoritePokemons.value.push(props.pokemonData);
 };
 </script>
 

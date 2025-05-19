@@ -6,8 +6,6 @@
     <div v-for="pokemon in filteredPokemons" :key="pokemon.name">
       <PokemonRow
         :pokemonData="pokemon"
-        :isFavorite="favoritePokemonNames.includes(pokemon.name)"
-        @addOrRemoveFavorite="addOrRemoveFavorite(pokemon)"
         @openPokemonDetails="openPokemonDetails(pokemon)"
       />
     </div>
@@ -37,24 +35,9 @@ const route = useRoute();
 const store = useStore();
 const filteredPokemons = ref([]);
 const allPokemons = computed(() => store.state.allPokemons);
-const favoritePokemons = computed(() => store.state.favoritePokemons);
-const favoritePokemonNames = computed(() => store.state.favoritePokemonNames);
 const searchPokemonWord = computed(() => store.state.searchPokemonWord);
 const loadingPokemons = computed(() => store.state.loadingPokemons);
 const filteredPokemonsKey = ref(0);
-
-
-const addOrRemoveFavorite = (pokemon) => {
-  for (let i = 0; i < favoritePokemons.value.length; i++) {
-    if (favoritePokemonNames.value[i] === pokemon.name) {
-      favoritePokemonNames.value.splice(i, 1);
-      favoritePokemons.value.splice(i, 1);
-      return;
-    }
-  }
-  favoritePokemonNames.value.push(pokemon.name);
-  favoritePokemons.value.push(pokemon);
-};
 
 const filterPokemons = () => {
   filteredPokemons.value = allPokemons.value.filter((pokemon) =>
