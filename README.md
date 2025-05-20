@@ -21,8 +21,11 @@
   Axios was used to handle requests to the Pokémon API, as it is a widely used and reliable library that simplifies making HTTP requests with its clear syntax and efficient response handling. 
 - ### PrimeIcons:
   The PrimeIcons library was used for the application’s icons because it is easy to integrate, offers a wide variety of icons, and allows for simple style customization. This way, there is no need to add each icon file individually to the project.
+- ### Vue Awesome Paginate:
+  For pagination i chose to use Vue Awesome Paginate libreary because it’s quick to set up and the styles are easy to customize. This helped to save time and manage the large amount of data coming from the endpoint.
 
-I kept the project simple but included a few libraries I’m familiar with to speed things up. For SASS/SCSS, I think it makes the CSS more organized and quicker to write, plus it’s easier to reuse mixins. For API requests, I went with Axios because it simplifies making calls and is a well-known, stable library. Lastly, I used PrimeIcons for the app’s icons since it’s a lightweight library with all the essential icons, and it’s super easy to customize their styles.
+
+I kept the project simple but included a few libraries I’m familiar with to speed things up. For SASS/SCSS, I think it makes the CSS more organized and quicker to write, plus it’s easier to reuse mixins. For API requests, I went with Axios because it simplifies making calls and is a well-known, stable library. I used PrimeIcons for the app’s icons since it’s a lightweight library with all the essential icons, and it’s super easy to customize their styles. Lastly, I used the Vue Awesome Paginate library to add a paginator and limit the amount of data returned by the endpoint, since it was bringing in a lot of information. I chose this library because it allowed me to quickly set up the component, and I didn’t have much time to build it from scratch.
 
 ## Project setup
 ```
