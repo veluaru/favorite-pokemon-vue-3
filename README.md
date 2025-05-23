@@ -1,5 +1,7 @@
 # 📚 Pokémon App (favorite-pokemon-vue-3) - README
 
+# This project is deployed in github pages in this [link](https://veluaru.github.io/favorite-pokemon-vue-3/#/).
+
 ## Features
 🌎 Pokémon Data - List and search for various Pokémons.
 
