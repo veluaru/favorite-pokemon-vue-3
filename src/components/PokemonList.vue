@@ -24,7 +24,7 @@
 <script setup>
 import { ref, computed, watch, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-import PokemonRow from "./PokemonRow.vue";
+import PokemonRow from "./PokemonCard.vue";
 import LoadingComponent from "./LoadingComponent.vue";
 
 const store = useStore();
