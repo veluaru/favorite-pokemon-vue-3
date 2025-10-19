@@ -20,27 +20,42 @@ export const typeColors = {
   dark: '#705746',
 };
 
-// You'll need actual icon files for these!
-// Example: import icon for grass type
-// import GrassIcon from '../assets/icons/type-grass.svg'; // You'd need to create this
+import typeNormal from '../assets/icons/type-normal.svg';
+import typeFire from '../assets/icons/type-fire.svg';
+import typeWater from '../assets/icons/type-water.svg';
+import typeGrass from '../assets/icons/type-grass.svg';
+import typeElectric from '../assets/icons/type-electric.svg';
+import typeIce from '../assets/icons/type-ice.svg';
+import typeFighting from '../assets/icons/type-fighting.svg';
+import typePoison from '../assets/icons/type-poison.svg';
+import typeGround from '../assets/icons/type-ground.svg';
+import typeFlying from '../assets/icons/type-flying.svg';
+import typePsychic from '../assets/icons/type-psychic.svg';
+import typeBug from '../assets/icons/type-bug.svg';
+import typeRock from '../assets/icons/type-rock.svg';
+import typeGhost from '../assets/icons/type-ghost.svg';
+import typeDragon from '../assets/icons/type-dragon.svg';
+import typeSteel from '../assets/icons/type-steel.svg';
+import typeFairy from '../assets/icons/type-fairy.svg';
+import typeDark from '../assets/icons/type-dark.svg';
 
 export const typeIcons = {
-  normal: '/src/assets/icons/type-normal.svg', // Placeholder paths
-  fire: '/src/assets/icons/type-fire.svg',
-  water: '/src/assets/icons/type-water.svg',
-  grass: '/src/assets/icons/type-grass.svg',
-  electric: '/src/assets/icons/type-electric.svg',
-  ice: '/src/assets/icons/type-ice.svg',
-  fighting: '/src/assets/icons/type-fighting.svg',
-  poison: '/src/assets/icons/type-poison.svg',
-  ground: '/src/assets/icons/type-ground.svg',
-  flying: '/src/assets/icons/type-flying.svg',
-  psychic: '/src/assets/icons/type-psychic.svg',
-  bug: '/src/assets/icons/type-bug.svg',
-  rock: '/src/assets/icons/type-rock.svg',
-  ghost: '/src/assets/icons/type-ghost.svg',
-  dragon: '/src/assets/icons/type-dragon.svg',
-  steel: '/src/assets/icons/type-steel.svg',
-  fairy: '/src/assets/icons/type-fairy.svg',
-  dark: '/src/assets/icons/type-dark.svg',
+  normal: typeNormal,
+  fire: typeFire,
+  water: typeWater,
+  grass: typeGrass,
+  electric: typeElectric,
+  ice: typeIce,
+  fighting: typeFighting,
+  poison: typePoison,
+  ground: typeGround,
+  flying: typeFlying,
+  psychic: typePsychic,
+  bug: typeBug,
+  rock: typeRock,
+  ghost: typeGhost,
+  dragon: typeDragon,
+  steel: typeSteel,
+  fairy: typeFairy,
+  dark: typeDark,
 };

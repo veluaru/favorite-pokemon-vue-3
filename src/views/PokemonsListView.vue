@@ -111,6 +111,8 @@ watch(favoritePokemons, (newVal) => {
 </script>
 
 <style scoped lang="scss">
+@use "@/assets/styles/_paginate.scss";
+
 .pokemon-list-container {
   width: 100%;
   max-width: 100%; // Allows grid to expand
@@ -142,42 +144,8 @@ watch(favoritePokemons, (newVal) => {
 
 .pokemon-pagination {
   margin-top: 20px;
-  // Further styling for pagination will go here (use :deep() if needed for vue-awesome-paginate)
-  // For example:
-  :deep(.pagination-container) {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-
-    .paginate-buttons {
-      background-color: white;
-      border: 1px solid $color-border-light;
-      color: $color-text-dark;
-      padding: 10px 15px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-
-      &:hover:not(.active) {
-        background-color: $background-light-grey;
-      }
-
-      &.active {
-        background-color: $color-pokemon-red;
-        color: white;
-        border-color: $color-pokemon-red;
-      }
-      &.back-button, &.next-button {
-        font-weight: bold;
-      }
-      &.disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-    }
+  :deep() {
+    @extend %paginate;
   }
 }
 

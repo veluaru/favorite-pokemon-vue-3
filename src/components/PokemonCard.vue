@@ -1,6 +1,6 @@
 <template>
-  <div class="pokemon-card">
-    <div class="pokemon-card__image-container" @click="emit('openPokemonDetails', props.pokemonData)">
+  <div class="pokemon-card" @click="emit('openPokemonDetails', props.pokemonData)">
+    <div class="pokemon-card__image-container" >
       <img
         :src="getPokemonImageUrl(props.pokemonData.url)"
         alt="Pokemon Sprite"
@@ -12,7 +12,7 @@
       {{ capitalizeStrings(props.pokemonData.name) }}
     </span>
 
-    <div class="pokemon-card__favorite-toggle" @click="addOrRemoveFavorite()">
+    <div class="pokemon-card__favorite-toggle" @click.stop="addOrRemoveFavorite()">
       <i
         class="pi pi-star-fill pokemon-card__favorite-icon"
         :class="{ 'pokemon-card__favorite-icon--favorited': isFavorited }"

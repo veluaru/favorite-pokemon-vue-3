@@ -83,7 +83,6 @@ const clearSearchAndGoHome = () => {
   changeView("pokemons");
 };
 
-// Logic for the All/Favorites toggles - moved from FooterButtons
 const changeSelectedPokemonView = (view) => {
   if (store.state.selectedPokemonView !== view) {
     store.commit("setSelectedPokemonView", view);

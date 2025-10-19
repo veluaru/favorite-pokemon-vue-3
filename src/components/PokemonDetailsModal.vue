@@ -269,7 +269,8 @@ onBeforeMount(async () => {
         width: 20px; // Size of type icon
         height: 20px;
         margin-right: 5px;
-        filter: brightness(0) invert(1); // Make icons white
+        border: 2px solid white;
+        border-radius: 50%;
       }
     }
 
