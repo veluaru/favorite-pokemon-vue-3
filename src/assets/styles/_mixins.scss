@@ -1,11 +1,57 @@
+@use 'variables' as *;
+@use "sass:color";
+
+// Mixin for general, less prominent buttons
 @mixin main-button {
-    width: 150px;
-    height: 44px;
-    border: none;
-    border-radius: 60px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #f22539;
-    cursor: pointer;
+  width: 150px;
+  height: 44px;
+  border: none;
+  border-radius: 60px;
+  color: $color-white; // Use variable
+  font-size: 18px;
+  font-weight: bold;
+  background-color: $color-pokemon-red; // Use variable for consistency
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; // Add box-shadow to transition
+
+  &:hover {
+    background-color: color.adjust($color-pokemon-red, $lightness: -10%); // Use darken with variable
+    transform: translateY(-2px); // Slightly more pronounced lift
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); // Subtle shadow on hover
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Pressed shadow
+  }
+}
+
+// Mixin for prominent Call-to-Action buttons
+@mixin cta-button-styled {
+  padding: 15px 40px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 50px;
+  background: linear-gradient(145deg, $color-button-red-light, $color-button-red-dark);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: $color-white; // Use variable
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, $color-button-red-dark, $color-button-red-light);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 480px) {
+    padding: 12px 30px;
+    font-size: 1em;
+  }
 }

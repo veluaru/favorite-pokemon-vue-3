@@ -44,7 +44,20 @@ export default createStore({
     },
     setSearchPokemonWord(state, newValue) {
       state.searchPokemonWord = newValue || false;
+    },
+      addFavoritePokemon(state, pokemon) {
+    if (!state.favoritePokemonNames.includes(pokemon.name)) {
+      state.favoritePokemons.push(pokemon);
+      state.favoritePokemonNames.push(pokemon.name);
     }
+  },
+  removeFavoritePokemon(state, pokemonName) {
+    const index = state.favoritePokemonNames.indexOf(pokemonName);
+    if (index > -1) {
+      state.favoritePokemonNames.splice(index, 1);
+      state.favoritePokemons.splice(index, 1);
+    }
+  },
   },
   actions: {
     getAllPokemons({ commit }, payload) {
