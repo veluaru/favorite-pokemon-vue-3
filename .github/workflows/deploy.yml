@@ -1,0 +1,35 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Change this to your main branch name (e.g., master)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Use a stable LTS version
+
+      # Install dependencies and build the app (Vue CLI defaults to `dist` folder)
+      - name: Install dependencies and build
+        run: |
+          npm install # Or yarn install
+          npm run build
+
+      # Deploy the 'dist' folder content to the 'gh-pages' branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # The folder containing the production build
+          publish_branch: gh-pages # The branch GitHub Pages serves from
