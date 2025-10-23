@@ -12,7 +12,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%; // Takes full height of parent container
+  height: 100%;
   padding: 50px 0; // Add some padding
   min-height: 200px; // Ensure it has minimum display height
   row-gap: 15px; // Space between icon and text
