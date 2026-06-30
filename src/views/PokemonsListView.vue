@@ -1,13 +1,10 @@
 <template>
   <div class="pokemon-list-container">
-    <div class="pokemon-grid" v-if="!loadingPokemons && selectedPokemons.length > 0">
-      <PokemonCard
-        v-for="pokemon in selectedPokemons"
-        :key="pokemon.name"
-        :pokemonData="pokemon"
-        @openPokemonDetails="openPokemonDetails"
-      />
-    </div>
+    <PokemonGrid
+      v-if="!loadingPokemons && selectedPokemons.length > 0"
+      :pokemons="selectedPokemons"
+      @openPokemonDetails="openPokemonDetails"
+    />
 
     <vue-awesome-paginate
       class="pokemon-pagination"
@@ -38,9 +35,10 @@
 <script setup>
 import { ref, computed, watch, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-import PokemonCard from "@/components/PokemonCard.vue";
 import LoadingComponent from "@/components/LoadingComponent.vue";
-import PokemonDetailsModal from "@/components/PokemonDetailsModal.vue";
+import PokemonDetailsModal from "@/components/pokemonDetails/PokemonDetailsModal.vue";
+import PokemonGrid from "@/components/PokemonGrid.vue";
+import usePokemonDetailsModal from "@/composables/pokemonDetails/usePokemonDetailsModal";
 
 const store = useStore();
 const selectedPokemons = ref([]);
@@ -55,9 +53,12 @@ const allPokemonsPagingParams = ref({
 });
 const currentPage = ref(1);
 
-// Modal state
-const showPokemonDetailsModal = ref(false);
-const selectedPokemonDetails = ref({});
+const {
+  showPokemonDetailsModal,
+  selectedPokemonDetails,
+  openPokemonDetails,
+  closePokemonDetails,
+} = usePokemonDetailsModal();
 
 const updatePokemonsList = async () => {
   if (selectedPokemonView.value === "allPokemons") {
@@ -74,16 +75,6 @@ const onClickPagingHandler = async (event) => {
   currentPage.value = event;
   allPokemonsPagingParams.value.offset = (event - 1) * allPokemonsPagingParams.value.limit;
   await store.dispatch("getAllPokemons", allPokemonsPagingParams.value);
-};
-
-const openPokemonDetails = (pokemon) => {
-  selectedPokemonDetails.value = pokemon;
-  showPokemonDetailsModal.value = true;
-};
-
-const closePokemonDetails = () => {
-  showPokemonDetailsModal.value = false;
-  selectedPokemonDetails.value = {};
 };
 
 onBeforeMount(() => {
@@ -121,24 +112,6 @@ watch(favoritePokemons, (newVal) => {
   align-items: center;
   gap: 30px; // Space between grid and pagination
   padding-bottom: 30px; // Bottom padding
-}
-
-.pokemon-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); // Responsive grid
-  gap: 20px; // Space between cards
-  width: 100%;
-  max-width: 100%; // Ensure it fills its container
-  padding: 0 10px; // Slight padding from edges of container
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 25px;
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 30px;
-  }
 }
 
 .pokemon-pagination {

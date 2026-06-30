@@ -32,10 +32,9 @@ import HomeFooter from "@/components/HomeFooter.vue";
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 20px;
     max-width: 1200px;
-    margin: 0 auto;
     width: 100%;
+    margin: 0 auto;
   }
 }
 </style>
