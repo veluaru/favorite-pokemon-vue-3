@@ -6,7 +6,7 @@
 #app {
   min-height: 100vh;
   font-family: Arial;
-  color: #2c3e50;
+  color: var(--app-text-color);
 }
 * {
   margin: 0;
@@ -15,7 +15,9 @@ html {
   height: 100%
 }
 body {
-  min-height: 100%
+  min-height: 100%;
+  background-color: var(--app-background-color);
+  color: var(--app-text-color);
 }
 /* Scroll bar stylings */
 ::-webkit-scrollbar {
@@ -24,12 +26,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #bdbdbd; 
+  background: var(--app-scrollbar-color);
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8; 
+  background: var(--app-scrollbar-hover-color);
 }
 </style>

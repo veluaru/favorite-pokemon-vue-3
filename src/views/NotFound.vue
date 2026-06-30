@@ -25,12 +25,19 @@ const changeView = (viewName) => {
   justify-content: center;
   align-items: center;
   row-gap: 30px;
-  width: 100%;
-  margin-top: 10%;
+  min-height: 100vh;
+  padding: 0 20px;
   text-align: center;
+  background-color: var(--app-background-color);
+  background-image: var(--app-background-image);
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: var(--app-background-size);
+
   &__title {
     font-size: 26px;
     font-weight: bold;
+    color: var(--app-text-color);
   }
   &__main-button {
     @include main-button;
@@ -39,6 +46,7 @@ const changeView = (viewName) => {
     font-size: 18px;
     font-weight: medium;
     max-width: 570px;
+    color: var(--app-text-secondary-color);
   }
 }
 </style>

@@ -26,3 +26,23 @@ $color-button-red-dark: #e02f2f; // Darker red for gradients
 // Accent Colors
 $color-star-yellow: #f7d02c; // Vibrant yellow for favorited stars
 $color-border-light: #e8e8e8; // Light border color for consistency
+
+// Shared UI Shadow/Scrollbar Tokens
+$color-shadow-light: rgba(0, 0, 0, 0.08);
+$color-shadow-heavy-light: rgba(0, 0, 0, 0.15);
+$color-scrollbar-light: #bdbdbd;
+$color-scrollbar-hover-light: #a8a8a8;
+
+// Dark Theme Colors
+$dark-background-main: #1f1f1f;
+$dark-surface-main: #2a2a2a;
+$dark-surface-muted: #343434;
+$dark-text-main: #ededed;
+$dark-text-secondary: #d0d0d0;
+$dark-text-muted: #ababab;
+$dark-border: #444444;
+$dark-icon-muted: #959595;
+$dark-shadow: rgba(0, 0, 0, 0.35);
+$dark-shadow-heavy: rgba(0, 0, 0, 0.45);
+$dark-scrollbar: #6d6d6d;
+$dark-scrollbar-hover: #878787;

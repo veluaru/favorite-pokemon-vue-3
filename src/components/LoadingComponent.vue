@@ -27,7 +27,7 @@
   &__text {
     font-size: 1.2em;
     font-weight: bold;
-    color: $color-grey-dark; // Muted text color
+    color: var(--app-text-secondary-color); // Muted text color
   }
 }
 

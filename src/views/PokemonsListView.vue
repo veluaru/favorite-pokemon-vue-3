@@ -38,10 +38,9 @@
 <script setup>
 import { ref, computed, watch, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-// Rename PokemonRow to PokemonCard in import
 import PokemonCard from "@/components/PokemonCard.vue";
 import LoadingComponent from "@/components/LoadingComponent.vue";
-import PokemonDetailsModal from "@/components/PokemonDetailsModal.vue"; // Moved here from PokemonRow
+import PokemonDetailsModal from "@/components/PokemonDetailsModal.vue";
 
 const store = useStore();
 const selectedPokemons = ref([]);
@@ -161,13 +160,13 @@ watch(favoritePokemons, (newVal) => {
   padding: 0 20px;
 
   &__title {
-    font-size: 2em; // Larger
+    font-size: 2em;
     font-weight: bold;
     color: $color-pokemon-red;
   }
   &__sub-title {
     font-size: 1.2em;
-    color: $color-text-dark;
+    color: var(--app-text-color);
     max-width: 400px;
     line-height: 1.4;
   }

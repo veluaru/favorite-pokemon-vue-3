@@ -20,7 +20,6 @@
 </template>
 
 <script setup>
-// This is the code for WelcomeView.vue
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import LoadingComponent from "../components/LoadingComponent.vue";
@@ -45,9 +44,12 @@ const changeView = (viewName) => {
   justify-content: center;
   align-items: center;
   min-height: 100vh; // Occupy full viewport height
-  background: $background-light-grey url('../assets/images/pokeball-pattern.png') repeat center center; // Use a subtle pattern
-  background-size: 150px; // Adjust pattern size as needed
-  padding: 20px; // General padding
+  background-color: var(--app-background-color); // Use a subtle pattern
+  background-image: var(--app-background-image);
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: var(--app-background-size); // Adjust pattern size as needed
+  padding: 0 20px;
 
   &__content-wrapper {
     display: flex;
@@ -57,10 +59,11 @@ const changeView = (viewName) => {
     text-align: center;
     row-gap: 25px; // Slightly adjusted row-gap
     max-width: 600px; // Max width for content
-    background-color: white; // White background for the content box
+    background-color: var(--app-surface-color); // White background for the content box
+    border: 1px solid var(--app-border-color);
     padding: 40px;
     border-radius: 20px; // Rounded corners for the content box
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); // Subtle shadow
+    box-shadow: 0 10px 30px var(--app-shadow-color); // Subtle shadow
 
     @media (max-width: 768px) {
       padding: 30px;
@@ -84,11 +87,10 @@ const changeView = (viewName) => {
   }
 
   &__title {
-    font-family: 'Pokemon Solid', sans-serif; // Assuming you've imported a custom font
-    font-size: 3.5em; // Larger, more striking title
-    color: $color-pokemon-red; // Custom color from variables
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.24); // Outline effect for title
-    margin: 0; // Remove default margins
+    font-size: 3.5em;
+    color: $color-pokemon-red;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.24);
+    margin: 0;
     line-height: 1;
 
     @media (max-width: 768px) {
@@ -100,10 +102,9 @@ const changeView = (viewName) => {
   }
 
   &__subtitle {
-    font-family: 'Open Sans', sans-serif; // Assuming another custom font for body
     font-size: 1.1em;
-    color: $color-text-dark; // Custom text color
-    max-width: 450px; // Control width for readability
+    color: var(--app-text-color);
+    max-width: 450px;
     line-height: 1.5;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -114,13 +115,12 @@ const changeView = (viewName) => {
   }
 
   &__cta-button {
-@include cta-button-styled; // Use the new mixin
+    @include cta-button-styled;
   }
 
   &__loading {
-    max-width: unset; // Ensure loading component respects its own styling
+    max-width: unset;
     width: 100%;
-    padding-top: 30%; // Keep your original loading padding
   }
 }
 
