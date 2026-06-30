@@ -96,10 +96,11 @@ const changeSelectedPokemonView = (view) => {
 <style scoped lang="scss">
 .search-controls {
   width: 100%;
-  max-width: 600px; // Slightly larger max-width
   margin: 30px auto;
   display: flex;
+  justify-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 20px; // Space between search bar and toggle buttons
 
   @media (max-width: 768px) {
@@ -111,12 +112,11 @@ const changeSelectedPokemonView = (view) => {
   display: flex;
   align-items: center;
   gap: 10px;
-  border-radius: 10px; // More rounded corners
-  box-shadow: 0px 5px 20px var(--app-shadow-color); // Stronger, softer shadow
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px var(--app-shadow-color);
   background-color: var(--app-surface-color);
-  height: 55px; // Taller search bar
-  padding: 0 15px; // Adjusted padding
-  width: 100%;
+  height: 55px;
+  padding: 0 15px;
 
   .search-bar__icon {
     color: var(--app-text-secondary-color); // Custom color for icon
@@ -125,12 +125,12 @@ const changeSelectedPokemonView = (view) => {
 
   .search-bar__input {
     border: none;
-    font-size: 1.1em; // Slightly larger text
+    font-size: 1.1em;
     color: var(--app-text-color);
     width: 100%;
-    height: 100%; // Fill height of wrapper
-    background: transparent; // Ensure transparent background
-    padding: 0; // Remove default input padding
+    height: 100%;
+    background: transparent;
+    padding: 0;
 
     &::placeholder {
       color: var(--app-text-muted-color); // Custom placeholder color
@@ -159,37 +159,36 @@ const changeSelectedPokemonView = (view) => {
 .view-toggle-buttons {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px; // Space between buttons
-  width: 100%;
 
   .view-toggle-buttons__button {
     flex: 1; // Allows buttons to take equal width
     max-width: 180px; // Max width for toggle buttons
-    @include main-button; // Use your existing main-button mixin as a base
-    background-color: var(--app-surface-muted-color); // Default unselected color
+    @include main-button;
+    background-color: var(--app-surface-muted-color);
     color: var(--app-text-color);
-    height: 50px; // Consistent height
+    height: 50px;
     border-radius: 10px; // Match search bar roundedness
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); // Shadow for toggle buttons
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 
     &--selected {
-      background: linear-gradient(90deg, $color-pokemon-red, $color-pokemon-red-dark); // Gradient for selected
+      background: linear-gradient(90deg, $color-pokemon-red, $color-pokemon-red-dark);
       color: white;
-      box-shadow: 0 4px 12px rgba(238, 21, 21, 0.3); // Redder shadow for selected
-      transform: translateY(-2px); // Slight lift when selected
+      box-shadow: 0 4px 12px rgba(238, 21, 21, 0.3);
     }
 
     &:not(&--selected):hover {
-      background-color: var(--app-border-color); // Lighter grey on hover
+      background-color: var(--app-border-color);
       transform: translateY(-1px);
     }
     &:disabled {
-      cursor: default; // No pointer on disabled
-      opacity: 1; // Don't fade out if selected
+      cursor: default;
+      opacity: 1;
     }
 
     .basic-icon {
-      margin-right: 8px; // Space between icon and text
+      margin-right: 8px;
       font-size: 1.2em; // Larger icon
     }
   }

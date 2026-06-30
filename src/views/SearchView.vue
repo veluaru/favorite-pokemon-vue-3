@@ -1,17 +1,11 @@
 <template>
   <div class="search-results-view">
-    <div
-      class="pokemon-grid"
+    <PokemonGrid
       v-if="!loadingPokemons && filteredPokemons.length > 0"
       :key="filteredPokemonsKey"
-    >
-      <PokemonCard
-        v-for="pokemon in filteredPokemons"
-        :key="pokemon.name"
-        :pokemonData="pokemon"
-        @openPokemonDetails="openPokemonDetails"
-      />
-    </div>
+      :pokemons="filteredPokemons"
+      @openPokemonDetails="openPokemonDetails"
+    />
 
     <div class="search__not-found" v-if="!loadingPokemons && filteredPokemons.length === 0">
       <span class="search__not-found__title">Uh-oh!</span>
@@ -37,9 +31,10 @@
 import { ref, computed, watch, onBeforeMount, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-import PokemonCard from "../components/PokemonCard.vue";
 import LoadingComponent from "../components/LoadingComponent.vue";
-import PokemonDetailsModal from "../components/PokemonDetailsModal.vue";
+import PokemonDetailsModal from "@/components/pokemonDetails/PokemonDetailsModal.vue";
+import PokemonGrid from "@/components/PokemonGrid.vue";
+import usePokemonDetailsModal from "@/composables/pokemonDetails/usePokemonDetailsModal.js";
 
 const router = useRouter();
 const route = useRoute();
@@ -50,9 +45,12 @@ const searchPokemonWord = computed(() => store.state.searchPokemonWord);
 const loadingPokemons = computed(() => store.state.loadingPokemons);
 const filteredPokemonsKey = ref(0);
 
-// Modal state
-const showPokemonDetailsModal = ref(false);
-const selectedPokemonDetails = ref({});
+const {
+  showPokemonDetailsModal,
+  selectedPokemonDetails,
+  openPokemonDetails,
+  closePokemonDetails,
+} = usePokemonDetailsModal();
 
 const filterPokemons = () => {
   const searchTerm = searchPokemonWord.value || route.params.word || '';
@@ -67,16 +65,6 @@ const filterPokemons = () => {
 
 const changeView = (viewName) => {
   router.push({ name: viewName });
-};
-
-const openPokemonDetails = (pokemon) => {
-  selectedPokemonDetails.value = pokemon;
-  showPokemonDetailsModal.value = true;
-};
-
-const closePokemonDetails = () => {
-  showPokemonDetailsModal.value = false;
-  selectedPokemonDetails.value = {};
 };
 
 onBeforeMount(async () => {
@@ -107,24 +95,6 @@ watch([searchPokemonWord, allPokemons], () => { // Watch both
   align-items: center;
   gap: 30px;
   padding-bottom: 30px;
-}
-
-.pokemon-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 100%;
-  padding: 0 10px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 25px;
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 30px;
-  }
 }
 
 .search__not-found {
