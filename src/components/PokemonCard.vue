@@ -65,9 +65,9 @@ const addOrRemoveFavorite = () => {
 
 <style scoped lang="scss">
 .pokemon-card {
-  background-color: white;
+  background-color: var(--app-surface-color);
   border-radius: 15px; // Rounded corners for cards
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); // Soft shadow
+  box-shadow: 0 6px 15px var(--app-shadow-color); // Soft shadow
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +78,7 @@ const addOrRemoveFavorite = () => {
 
   &:hover {
     transform: translateY(-5px); // Lift card on hover
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); // Deeper shadow on hover
+    box-shadow: 0 10px 25px var(--app-shadow-heavy-color); // Deeper shadow on hover
   }
 
   &__image-container {
@@ -89,7 +89,7 @@ const addOrRemoveFavorite = () => {
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    background-color: $background-light-grey; // Light background for image
+    background-color: var(--app-surface-muted-color); // Light background for image
     border-radius: 10px;
   }
 
@@ -102,7 +102,7 @@ const addOrRemoveFavorite = () => {
   &__name {
     font-family: 'Pokemon Solid', sans-serif; // Consistent font
     font-size: 1.4em; // Larger name
-    color: $color-text-dark; // Darker text
+    color: var(--app-text-color); // Darker text
     margin-top: 5px;
     margin-bottom: 15px; // Space below name
     text-align: center;
@@ -117,7 +117,7 @@ const addOrRemoveFavorite = () => {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: white;
+    background-color: var(--app-surface-color);
     border-radius: 50%;
     width: 35px; // Smaller circle
     height: 35px;
@@ -129,14 +129,14 @@ const addOrRemoveFavorite = () => {
     transition: background-color 0.2s ease, transform 0.2s ease;
 
     &:hover {
-      background-color: $background-light-grey;
+      background-color: var(--app-surface-muted-color);
       transform: scale(1.1);
     }
   }
 
   &__favorite-icon {
     font-size: 1.4em; // Consistent size
-    color: $color-grey-light; // Default grey
+    color: var(--app-icon-muted-color); // Default grey
 
     &--favorited {
       color: $color-star-yellow; // Yellow when favorited

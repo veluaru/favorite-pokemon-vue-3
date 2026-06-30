@@ -37,10 +37,9 @@
 import { ref, computed, watch, onBeforeMount, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-// Rename PokemonRow to PokemonCard
 import PokemonCard from "../components/PokemonCard.vue";
 import LoadingComponent from "../components/LoadingComponent.vue";
-import PokemonDetailsModal from "../components/PokemonDetailsModal.vue"; // Moved here from PokemonCard
+import PokemonDetailsModal from "../components/PokemonDetailsModal.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -49,7 +48,7 @@ const filteredPokemons = ref([]);
 const allPokemons = computed(() => store.state.allPokemons);
 const searchPokemonWord = computed(() => store.state.searchPokemonWord);
 const loadingPokemons = computed(() => store.state.loadingPokemons);
-const filteredPokemonsKey = ref(0); // Used for force re-render if needed, though Vue usually handles this.
+const filteredPokemonsKey = ref(0);
 
 // Modal state
 const showPokemonDetailsModal = ref(false);
@@ -64,8 +63,6 @@ const filterPokemons = () => {
   } else {
     filteredPokemons.value = [];
   }
-  // No need to increment key unless you're having specific rendering issues
-  // filteredPokemonsKey.value += 1;
 };
 
 const changeView = (viewName) => {
@@ -112,7 +109,6 @@ watch([searchPokemonWord, allPokemons], () => { // Watch both
   padding-bottom: 30px;
 }
 
-// Reuse pokemon-grid styling from PokemonListView
 .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -149,14 +145,14 @@ watch([searchPokemonWord, allPokemons], () => { // Watch both
   }
   &__sub-title {
     font-size: 1.2em;
-    color: $color-text-dark;
+    color: var(--app-text-color);
     max-width: 400px;
     line-height: 1.4;
   }
 
-  .cta-button { // Use the general CTA button styling
-    @include cta-button-styled; // Assuming you made this mixin for WelcomeView
-    max-width: 200px; // Adjust max width for this button
+  .cta-button {
+    @include cta-button-styled;
+    max-width: 200px;
   }
 }
 </style>

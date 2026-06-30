@@ -123,7 +123,7 @@ onBeforeMount(async () => {
 
 .modal-content {
   position: relative; // For close button positioning
-  background-color: #fff;
+  background-color: var(--app-surface-color);
   border-radius: 20px; // More rounded corners
   width: 90%; // Max width percentage
   max-width: 500px; // Absolute max-width
@@ -145,7 +145,7 @@ onBeforeMount(async () => {
   position: absolute;
   top: 15px;
   right: 15px;
-  background-color: rgba(255, 255, 255, 0.8); // Semi-transparent white
+  background-color: var(--app-surface-muted-color);
   border: none;
   border-radius: 50%;
   width: 35px;
@@ -159,12 +159,12 @@ onBeforeMount(async () => {
   transition: all 0.2s ease;
 
   &:hover {
-    background-color: white;
+    background-color: var(--app-surface-color);
     transform: scale(1.1);
   }
   .pi {
     font-size: 1.2em;
-    color: $color-text-dark;
+    color: var(--app-text-color);
   }
 }
 
@@ -209,7 +209,7 @@ onBeforeMount(async () => {
     display: flex;
     flex-direction: column;
     padding: 25px; // More generous padding
-    background-color: white; // Explicit white background
+    background-color: var(--app-surface-color); // Explicit white background
     border-radius: 0 0 20px 20px; // Match modal border radius at bottom
 
     &__row {
@@ -218,7 +218,7 @@ onBeforeMount(async () => {
       align-items: center;
       column-gap: 15px; // Increased gap
       padding: 12px 0; // Slightly more padding
-      border-bottom: 1px solid $color-border-light; // Lighter border
+      border-bottom: 1px solid var(--app-border-color); // Lighter border
 
       &:last-of-type {
         border-bottom: none; // No border on last row
@@ -235,14 +235,14 @@ onBeforeMount(async () => {
       font-family: 'Open Sans', sans-serif; // Consistent font
       font-size: 1.1em;
       font-weight: bold;
-      color: $color-grey-dark; // Muted title color
+      color: var(--app-text-secondary-color); // Muted title color
       min-width: 70px; // Give titles some minimum width
     }
     &__text {
       font-family: 'Open Sans', sans-serif;
       font-size: 1.1em;
       font-weight: normal; // Less bold for value
-      color: $color-text-dark;
+      color: var(--app-text-color);
       flex-grow: 1; // Allows text to fill space
     }
 
