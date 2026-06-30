@@ -374,6 +374,7 @@ onBeforeUnmount(() => {
     padding: 25px; // More generous padding
     background-color: var(--app-surface-color); // Explicit white background
     border-radius: 0 0 20px 20px; // Match modal border radius at bottom
+    max-height: calc(100vh - 280px);
     overflow-y: auto;
     overflow-x: hidden;
     min-height: 0;
@@ -545,6 +546,7 @@ onBeforeUnmount(() => {
 
     &__content {
       padding: 16px;
+      max-height: calc(100vh - 240px);
     }
   }
 
