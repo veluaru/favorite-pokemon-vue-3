@@ -1,3 +1,37 @@
 @use "./_paginate.scss";
 @use "./_mixins.scss";
-@use "./_variables.scss";
+@use "./_variables.scss" as *;
+
+:root {
+  --app-background-color: #{$background-light-grey};
+  --app-background-image: url("../images/pokeball-pattern.png");
+  --app-background-size: 160px;
+  --app-surface-color: #{$background-white};
+  --app-surface-muted-color: #{$background-light-grey};
+  --app-text-color: #{$color-text-dark};
+  --app-text-secondary-color: #{$color-grey-dark};
+  --app-text-muted-color: #{$color-text-light};
+  --app-border-color: #{$color-border-light};
+  --app-icon-muted-color: #{$color-grey-light};
+  --app-shadow-color: #{$color-shadow-light};
+  --app-shadow-heavy-color: #{$color-shadow-heavy-light};
+  --app-scrollbar-color: #{$color-scrollbar-light};
+  --app-scrollbar-hover-color: #{$color-scrollbar-hover-light};
+}
+
+[data-theme="dark"] {
+  --app-background-color: #{$dark-background-main};
+  --app-background-image: url("../images/pokeball-pattern-dark.png");
+  --app-background-size: 200px;
+  --app-surface-color: #{$dark-surface-main};
+  --app-surface-muted-color: #{$dark-surface-muted};
+  --app-text-color: #{$dark-text-main};
+  --app-text-secondary-color: #{$dark-text-secondary};
+  --app-text-muted-color: #{$dark-text-muted};
+  --app-border-color: #{$dark-border};
+  --app-icon-muted-color: #{$dark-icon-muted};
+  --app-shadow-color: #{$dark-shadow};
+  --app-shadow-heavy-color: #{$dark-shadow-heavy};
+  --app-scrollbar-color: #{$dark-scrollbar};
+  --app-scrollbar-hover-color: #{$dark-scrollbar-hover};
+}

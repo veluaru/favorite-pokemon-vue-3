@@ -13,6 +13,7 @@ export default createStore({
       loadingPokemonByName: false,
       isSearchView: false,
       searchPokemonWord: null,
+      isDarkMode: false,
     }
   },
   getters: {
@@ -44,6 +45,9 @@ export default createStore({
     },
     setSearchPokemonWord(state, newValue) {
       state.searchPokemonWord = newValue || false;
+    },
+    setIsDarkMode(state, newValue) {
+      state.isDarkMode = newValue || false;
     },
       addFavoritePokemon(state, pokemon) {
     if (!state.favoritePokemonNames.includes(pokemon.name)) {
@@ -82,7 +86,7 @@ export default createStore({
         }).catch(error => {
           console.error(error);
         });
-    }
+    },
   },
 
 })

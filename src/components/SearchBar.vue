@@ -112,28 +112,28 @@ const changeSelectedPokemonView = (view) => {
   align-items: center;
   gap: 10px;
   border-radius: 10px; // More rounded corners
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1); // Stronger, softer shadow
-  background-color: white;
+  box-shadow: 0px 5px 20px var(--app-shadow-color); // Stronger, softer shadow
+  background-color: var(--app-surface-color);
   height: 55px; // Taller search bar
   padding: 0 15px; // Adjusted padding
   width: 100%;
 
   .search-bar__icon {
-    color: $color-grey-dark; // Custom color for icon
+    color: var(--app-text-secondary-color); // Custom color for icon
     font-size: 20px; // Larger icon
   }
 
   .search-bar__input {
     border: none;
     font-size: 1.1em; // Slightly larger text
-    color: $color-text-dark;
+    color: var(--app-text-color);
     width: 100%;
     height: 100%; // Fill height of wrapper
     background: transparent; // Ensure transparent background
     padding: 0; // Remove default input padding
 
     &::placeholder {
-      color: $color-grey-light; // Custom placeholder color
+      color: var(--app-text-muted-color); // Custom placeholder color
       font-weight: normal;
     }
     &:focus {
@@ -144,7 +144,7 @@ const changeSelectedPokemonView = (view) => {
   .search-bar__clear-button {
     background: none;
     border: none;
-    color: $color-grey-dark;
+    color: var(--app-text-secondary-color);
     font-size: 2em; // Large 'x'
     cursor: pointer;
     padding: 0 5px;
@@ -166,7 +166,8 @@ const changeSelectedPokemonView = (view) => {
     flex: 1; // Allows buttons to take equal width
     max-width: 180px; // Max width for toggle buttons
     @include main-button; // Use your existing main-button mixin as a base
-    background-color: $color-grey-medium; // Default unselected color
+    background-color: var(--app-surface-muted-color); // Default unselected color
+    color: var(--app-text-color);
     height: 50px; // Consistent height
     border-radius: 10px; // Match search bar roundedness
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); // Shadow for toggle buttons
@@ -179,7 +180,7 @@ const changeSelectedPokemonView = (view) => {
     }
 
     &:not(&--selected):hover {
-      background-color: $color-grey-light; // Lighter grey on hover
+      background-color: var(--app-border-color); // Lighter grey on hover
       transform: translateY(-1px);
     }
     &:disabled {
