@@ -302,7 +302,7 @@ onBeforeUnmount(() => {
   &__header {
     height: 220px;
     display: flex;
-    flex-direction: column; // Stack image and name
+    flex-direction: column;
     justify-content: flex-end; // Push image and name to bottom
     align-items: center;
     padding-bottom: 20px;
